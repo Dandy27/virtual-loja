@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:provider/provider.dart';
+import 'package:virtualloja_app/models/page_manager.dart';
 class DrawerTile extends StatelessWidget {
   final IconData iconData;
   final String title;
@@ -9,9 +10,14 @@ class DrawerTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // quando for utilizar dentro do "build para modificar o estado conforme um valor interno você vai colocr o tipo "watch""
+    final int curPage = context.watch<PageManager>().page;
+
     return InkWell(
       onTap: (){
-        debugPrint(' touch $page');
+        // sempre que for utilizar o "context" e for buscar um objeto pelo o "Provider"dentro de uma função, tem que utilizar o "read"
+        context.read<PageManager>().setPage(page);
+        
       },
       child: SizedBox(
         height: 60,
@@ -22,12 +28,13 @@ class DrawerTile extends StatelessWidget {
               child: Icon(
                 iconData,
                 size: 32,
-                color: Colors.grey[700],
+                color: curPage == page ? Colors.red : Colors.grey[700],
               ),
             ),
             Text(
               title,
-              style: TextStyle(fontSize: 16, color: Colors.grey[700]),
+              style: TextStyle(fontSize: 16,
+                color: curPage == page ? Colors.red : Colors.grey[700]),
             )
           ],
         ),
