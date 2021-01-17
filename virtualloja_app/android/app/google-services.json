@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "97185182395",
+    "project_id": "loja-virtual-2f92e",
+    "storage_bucket": "loja-virtual-2f92e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97185182395:android:8744e25ca14a9a6404af9e",
+        "android_client_info": {
+          "package_name": "br.com.dandy.virtualloja_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97185182395-ojq52pjdsbl4q4hrllf69a1arjmu20jh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwDR85KaJJ2iZoQjSA9huu-30NxgTiNcc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97185182395-ojq52pjdsbl4q4hrllf69a1arjmu20jh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
