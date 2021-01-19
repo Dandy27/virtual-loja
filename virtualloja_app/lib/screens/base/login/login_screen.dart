@@ -11,9 +11,6 @@ class LoginScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +18,17 @@ class LoginScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Entrar'),
         centerTitle: true,
+        actions: [
+          FlatButton(
+              onPressed: () {
+                Navigator.of(context).pushReplacementNamed('/signup');
+              },
+              textColor: Colors.white,
+              child: const Text(
+                'CRIAR CONTA',
+                style: TextStyle(fontSize: 14),
+              ))
+        ],
       ),
       body: Center(
         child: Card(
@@ -71,21 +79,19 @@ class LoginScreen extends StatelessWidget {
                   child: RaisedButton(
                     onPressed: () {
                       if (formKey.currentState.validate()) {
-                        context.read<UserManager>().signIn(user: User(
-                          email: emailController.text,
-                          password: passController.text
-                        ),
-                        onFail: (e){
-                          scaffoldKey.currentState.showSnackBar(
-                          SnackBar(content: Text(
-                            'Falha ao entrar: $e'
-                          ),
-                          backgroundColor: Colors.red,)
-                          );
-                        },
-                        onSuccess: (){
-                          // TODO FECHAR A TELA DE LOGIN
-                        });
+                        context.read<UserManager>().signIn(
+                            user: User(
+                                email: emailController.text,
+                                password: passController.text),
+                            onFail: (e) {
+                              scaffoldKey.currentState.showSnackBar(SnackBar(
+                                content: Text('Falha ao entrar: $e'),
+                                backgroundColor: Colors.red,
+                              ));
+                            },
+                            onSuccess: () {
+                              // TODO FECHAR A TELA DE LOGIN
+                            });
                       }
                     },
                     color: Theme.of(context).primaryColor,
