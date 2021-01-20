@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:virtualloja_app/helpers/validators.dart';
 import 'package:virtualloja_app/models/user.dart';
+import 'package:provider/provider.dart';
+import 'package:virtualloja_app/models/user_manager.dart';
 
 class SignUpScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -98,8 +100,19 @@ class SignUpScreen extends StatelessWidget {
                           ));
                           return;
                         }
+                        context.read<UserManager>().signUp(
+                            user: user,
+                            onSuccess: () {
+                              debugPrint('sucesso');
+                              // TODO: POP
+                            },
+                            onFail: (e) {
+                              scaffoldKey.currentState.showSnackBar(SnackBar(
+                                content: Text('Falha ao cadastrar: $e'),
+                                backgroundColor: Colors.red,
+                              ));
+                            });
                       }
-
                     },
                     child: const Text(
                       'Criar Conta',
