@@ -7,7 +7,7 @@ class CustomDrawerHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(32, 24, 16, 8),
-      height: 120,
+      height: 180,
       child: Consumer<UserManager>(
         builder : (_, userManager, __){
           return Column(
@@ -15,7 +15,7 @@ class CustomDrawerHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Text(
-                'RR BEBIDAS ',
+                'DANDY 27 STORE ',
                 style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
               ),
               Text(
