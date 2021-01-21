@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => UserManager(),
           lazy: false,
-        ), Provider(create: (_) => ProductManager(),
+        ), ChangeNotifierProvider(create: (_) => ProductManager(),
         lazy: false,)
       ],
       child: MaterialApp(
