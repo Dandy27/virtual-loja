@@ -97,7 +97,7 @@ class LoginScreen extends StatelessWidget {
                                         ));
                                       },
                                       onSuccess: () {
-                                        // TODO FECHAR A TELA DE LOGIN
+                                        Navigator.of(context).pop();
                                       });
                                 }
                               },

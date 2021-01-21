@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:virtualloja_app/models/user_manager.dart';
 import 'package:virtualloja_app/screens/base/base_screen.dart';
+import 'package:virtualloja_app/screens/base/login/login_screen.dart';
 import 'package:virtualloja_app/screens/base/signup/signup_screen.dart';
 
 void main() async {
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => UserManager(),
+      lazy: false,
       child: MaterialApp(
         title: 'RR BEBIDAS ',
         debugShowCheckedModeBanner: false,
@@ -28,6 +30,9 @@ class MyApp extends StatelessWidget {
         initialRoute: 'base',
         onGenerateRoute: (settings){
           switch(settings.name){
+            case '/login':
+              return MaterialPageRoute(builder: (_) => LoginScreen());
+
             case '/signup':
               return MaterialPageRoute(builder: (_) => SignUpScreen());
             case '/base':
