@@ -3,6 +3,7 @@ import 'package:virtualloja_app/commom/custom_drawe/custom_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:virtualloja_app/models/page_manager.dart';
 import 'package:virtualloja_app/screens/base/login/login_screen.dart';
+import 'package:virtualloja_app/screens/products/products_screen.dart';
 
 class BaseScreen extends StatelessWidget {
 
@@ -22,12 +23,7 @@ class BaseScreen extends StatelessWidget {
               title: const Text('Home1'),
             ),
           ),
-          Scaffold(
-            drawer: CustomDrawer() ,
-            appBar: AppBar(
-              title: const Text('Home1'),
-            ),
-          ),
+          ProductsScreen(),
           Scaffold(
             drawer: CustomDrawer() ,
             appBar: AppBar(
