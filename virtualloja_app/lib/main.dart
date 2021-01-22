@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:virtualloja_app/models/product.dart';
 import 'package:virtualloja_app/models/product_manager.dart';
 import 'package:virtualloja_app/models/user_manager.dart';
 import 'package:virtualloja_app/screens/base/base_screen.dart';
 import 'package:virtualloja_app/screens/base/login/login_screen.dart';
 import 'package:virtualloja_app/screens/base/signup/signup_screen.dart';
+import 'package:virtualloja_app/screens/product/product_screen.dart';
 
 void main() async {
   runApp(MyApp());
@@ -18,8 +20,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => UserManager(),
           lazy: false,
-        ), ChangeNotifierProvider(create: (_) => ProductManager(),
-        lazy: false,)
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ProductManager(),
+          lazy: false,
+        )
       ],
       child: MaterialApp(
         title: 'DANDY 27 STORE ',
@@ -38,6 +43,10 @@ class MyApp extends StatelessWidget {
 
             case '/signup':
               return MaterialPageRoute(builder: (_) => SignUpScreen());
+            case '/product':
+              return MaterialPageRoute(builder: (_) => ProductScreen(
+                settings.arguments as Product
+              ));
             case '/base':
             default:
               return MaterialPageRoute(builder: (_) => BaseScreen());
