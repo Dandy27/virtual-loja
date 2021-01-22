@@ -4,6 +4,8 @@ import 'package:virtualloja_app/commom/custom_drawe/custom_drawer.dart';
 import 'package:virtualloja_app/models/product_manager.dart';
 import 'package:virtualloja_app/screens/products/components/product_list_tile.dart';
 
+import 'components/search_dialog.dart';
+
 class ProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -12,16 +14,23 @@ class ProductsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Produtos'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.search),
+            onPressed: () {
+              showDialog(context: context, builder: (_) => SearchDialog());
+            },
+          )
+        ],
       ),
       body: Consumer<ProductManager>(
-        builder: (_, productManager, __){
+        builder: (_, productManager, __) {
           return ListView.builder(
             padding: const EdgeInsets.all(4),
             itemCount: productManager.allProducts.length,
-            itemBuilder: (_, index){
-                return ProductListTile(productManager.allProducts[index]);
+            itemBuilder: (_, index) {
+              return ProductListTile(productManager.allProducts[index]);
             },
-
           );
         },
       ),
