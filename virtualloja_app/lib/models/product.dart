@@ -11,9 +11,6 @@ class Product  extends ChangeNotifier{
     images = List<String>.from(document.data['images'] as List<dynamic>);
     sizes = (document.data['sizes'] as List<dynamic> ?? []).map(
             (s) => ItemSize.fromMap(s as Map<String, dynamic>)).toList();
-
-
-
   }
 
   String id;
@@ -27,9 +24,19 @@ class Product  extends ChangeNotifier{
   set selectedSize(ItemSize value){
     _selectedSize = value;
 
-
     notifyListeners();
   }
 
+  int get totalStock {
+    int stock = 0;
+    for(final size in sizes){
+      stock += size.stock;
+    }
+    return stock;
+  }
+
+  bool get hasStock {
+    return totalStock > 0;
+  }
 
 }
