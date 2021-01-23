@@ -8,6 +8,7 @@ import 'package:virtualloja_app/screens/base/base_screen.dart';
 import 'package:virtualloja_app/screens/base/login/login_screen.dart';
 import 'package:virtualloja_app/screens/base/signup/signup_screen.dart';
 import 'package:virtualloja_app/screens/product/product_screen.dart';
+import 'screens/cart/cart_screen.dart';
 
 void main() async {
   runApp(MyApp());
@@ -22,9 +23,7 @@ class MyApp extends StatelessWidget {
           create: (_) => UserManager(),
           lazy: false,
         ),
-        Provider(
-          create: (_) => CartManager(),
-        lazy: false),
+        Provider(create: (_) => CartManager(), lazy: false),
         ChangeNotifierProvider(
           create: (_) => ProductManager(),
           lazy: false,
@@ -48,9 +47,10 @@ class MyApp extends StatelessWidget {
             case '/signup':
               return MaterialPageRoute(builder: (_) => SignUpScreen());
             case '/product':
-              return MaterialPageRoute(builder: (_) => ProductScreen(
-                settings.arguments as Product
-              ));
+              return MaterialPageRoute(
+                  builder: (_) => ProductScreen(settings.arguments as Product));
+            case '/cart':
+              return MaterialPageRoute(builder: (_) => CartScreen());
             case '/base':
             default:
               return MaterialPageRoute(builder: (_) => BaseScreen());
