@@ -19,20 +19,20 @@ class BaseScreen extends StatelessWidget {
           Scaffold(
             drawer: CustomDrawer() ,
             appBar: AppBar(
-              title: const Text('Home1'),
+              title: const Text('Home'),
             ),
           ),
           ProductsScreen(),
           Scaffold(
             drawer: CustomDrawer() ,
             appBar: AppBar(
-              title: const Text('Home2'),
+              title: const Text('Meus Pedidos'),
             ),
           ),
           Scaffold(
             drawer: CustomDrawer() ,
             appBar: AppBar(
-              title: const Text('Home3'),
+              title: const Text('Lojas'),
             ),
           ),
           Container(color: Colors.red,),

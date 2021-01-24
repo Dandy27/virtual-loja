@@ -5,10 +5,12 @@ import 'package:virtualloja_app/models/product.dart';
 import 'package:virtualloja_app/models/user.dart';
 import 'package:virtualloja_app/models/user_manager.dart';
 
-class CartManager extends ChangeNotifier{
+class CartManager extends ChangeNotifier {
   List<CartProduct> items = [];
 
   User user;
+
+  num productsPrice = 0.0;
 
   void updateUser(UserManager userManager) {
     user = userManager.user;
@@ -23,7 +25,9 @@ class CartManager extends ChangeNotifier{
     final QuerySnapshot cartSnap = await user.cartReference.getDocuments();
 
     items = cartSnap.documents
-        .map((d) => CartProduct.fromDocument(d)..addListener(_onItemUpdated))
+        .map((d) =>
+    CartProduct.fromDocument(d)
+      ..addListener(_onItemUpdated))
         .toList();
   }
 
@@ -38,6 +42,7 @@ class CartManager extends ChangeNotifier{
       user.cartReference
           .add(cartProduct.toCartItemMap())
           .then((doc) => cartProduct.id = doc.documentID);
+      _onItemUpdated();
     }
     notifyListeners();
   }
@@ -47,21 +52,39 @@ class CartManager extends ChangeNotifier{
     user.cartReference.document(cartProduct.id).delete();
     cartProduct.removeListener(_onItemUpdated);
     notifyListeners();
-
   }
 
   void _onItemUpdated() {
-    for (final cartProduct in items) {
+    productsPrice = 0.0;
+
+    for (int i = 0; i < items.length; i++) {
+      final cartProduct = items[i];
+
       if (cartProduct.quantity == 0) {
         removeOfCart(cartProduct);
+        i--;
+        continue;
       }
+
+      productsPrice += cartProduct.totalPrice;
+
       _updateCartProduct(cartProduct);
     }
+
+    print(productsPrice);
   }
 
   void _updateCartProduct(CartProduct cartProduct) {
+    if(cartProduct.id != null)
     user.cartReference
         .document(cartProduct.id)
         .updateData(cartProduct.toCartItemMap());
+  }
+
+  bool get isCartValid {
+    for (final cartProduct in items) {
+      if (!cartProduct.hasStock) return false;
+    }
+    return true;
   }
 }

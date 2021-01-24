@@ -40,6 +40,8 @@ class CartProduct  extends ChangeNotifier {
     return itemSize?.price ?? 0;
   }
 
+  num get totalPrice => unitPrice * quantity;
+
   Map<String, dynamic> toCartItemMap() {
     return {'pid': productId, 'quantity': quantity, 'size': size};
   }
@@ -57,6 +59,12 @@ class CartProduct  extends ChangeNotifier {
     quantity--;
     notifyListeners();
 
+  }
+
+  bool get hasStock {
+    final size = itemSize;
+    if(size == null) return false;
+    return size.stock >= quantity;
   }
 
 }
