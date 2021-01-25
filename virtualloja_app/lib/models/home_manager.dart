@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:virtualloja_app/models/section.dart';
 
-class HomeManager {
-
-  HomeManager(){
+class HomeManager extends ChangeNotifier {
+  HomeManager() {
     _loadSections();
   }
 
@@ -14,11 +14,10 @@ class HomeManager {
   Future<void> _loadSections() async {
     firestore.collection('home').snapshots().listen((snapshot) {
       sections.clear();
-      for(final DocumentSnapshot document in snapshot.documents){
+      for (final DocumentSnapshot document in snapshot.documents) {
         sections.add(Section.fromDocument(document));
       }
-      print(sections);
+      notifyListeners();
     });
   }
-
 }
