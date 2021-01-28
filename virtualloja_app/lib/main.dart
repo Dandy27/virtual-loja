@@ -9,6 +9,7 @@ import 'package:virtualloja_app/models/user_manager.dart';
 import 'package:virtualloja_app/screens/base/base_screen.dart';
 import 'package:virtualloja_app/screens/base/login/login_screen.dart';
 import 'package:virtualloja_app/screens/base/signup/signup_screen.dart';
+import 'package:virtualloja_app/screens/edit_product/edit_product_screen.dart';
 import 'package:virtualloja_app/screens/product/product_screen.dart';
 import 'screens/cart/cart_screen.dart';
 
@@ -67,9 +68,12 @@ class MyApp extends StatelessWidget {
                   builder: (_) => ProductScreen(settings.arguments as Product));
             case '/cart':
               return MaterialPageRoute(builder: (_) => CartScreen());
+            case '/edit_product':
+              return MaterialPageRoute(builder: (_) => EditProductScreen());
             case '/base':
             default:
               return MaterialPageRoute(builder: (_) => BaseScreen());
+
           }
         },
       ),
