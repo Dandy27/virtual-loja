@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:flutter/cupertino.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/material.dart';
 import 'package:virtualloja_app/models/product.dart';
@@ -40,26 +40,38 @@ class ImagesForm extends StatelessWidget {
                   )
                 ],
               );
-            }).toList()..add(
-              Material(
-                color: Colors.grey[100],
-                child: IconButton(
-                  icon: Icon(Icons.add_a_photo),
-                  color: Theme.of(context).primaryColor,
-                  iconSize: 50,
-                  onPressed:(){
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (_) => ImageSourceSheet()
-                    );
-                  }
+            }).toList()
+              ..add(
+                Material(
+                  color: Colors.grey[100],
+                  child: IconButton(
+                      icon: Icon(Icons.add_a_photo),
+                      color: Theme
+                          .of(context)
+                          .primaryColor,
+                      iconSize: 50,
+                      onPressed: () {
+                        if (Platform.isAndroid)
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (_) => ImageSourceSheet()
+                          );
+                        else
+                          showCupertinoModalPopup(
+                              context: context,
+                              builder: (_) => ImageSourceSheet()
+                          );
+                      }
+
+                  ),
                 ),
               ),
-            ),
             // dotSize: 4,
             dotSpacing: 15,
             dotBgColor: Colors.transparent,
-            dotColor: Theme.of(context).primaryColor,
+            dotColor: Theme
+                .of(context)
+                .primaryColor,
             autoplay: false,
           ),
         );
