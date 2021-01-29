@@ -38,6 +38,7 @@ dependencies:
   alphabet_list_scroll_view: ^1.0.6
   faker: ^1.3.0
   image_picker: ^0.6.7+21
+  image_cropper: ^1.2.2
 
 dev_dependencies:
   flutter_test:
