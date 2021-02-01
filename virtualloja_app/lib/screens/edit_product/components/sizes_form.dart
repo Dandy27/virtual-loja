@@ -22,13 +22,14 @@ class SizesForm extends StatelessWidget {
                     Expanded(
                       child: Text(
                         'Tamanhos',
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w500),
                       ),
                     ),
                     CustomIconButton(
                       iconData: Icons.add,
                       color: Colors.black,
-                      onTap: (){
+                      onTap: () {
                         state.value.add(ItemSize());
                         state.didChange(state.value);
                       },
@@ -38,11 +39,28 @@ class SizesForm extends StatelessWidget {
                 Column(
                   children: state.value.map((size) {
                     return EditItemSize(
+                      key: ObjectKey(size),
                       size: size,
-                      onRemove: (){
+                      onRemove: () {
                         state.value.remove(size);
                         state.didChange((state.value));
                       },
+                      onMoveUp: size != state.value.first
+                          ? () {
+                              final index = state.value.indexOf(size);
+                              state.value.remove(size);
+                              state.value.insert(index - 1, size);
+                              state.didChange(state.value);
+                            }
+                          : null,
+                      onMoveDown: size != state.value.last
+                          ? () {
+                              final index = state.value.indexOf(size);
+                              state.value.remove(size);
+                              state.value.insert(index + 1, size);
+                              state.didChange(state.value);
+                            }
+                          : null,
                     );
                   }).toList(),
                 ),
