@@ -5,7 +5,8 @@ import 'components/images_form.dart';
 import 'components/sizes_form.dart';
 
 class EditProductScreen extends StatelessWidget {
-  EditProductScreen(this.product);
+
+  EditProductScreen(Product p) : product = p.clone() != null ? p : Product();
 
   final Product product;
 
@@ -68,24 +69,29 @@ class EditProductScreen extends StatelessWidget {
                       fontSize: 16,
                     ),
                     decoration: const InputDecoration(
-                      hintText: 'Descrição',
-                      border: InputBorder.none
-                    ),
+                        hintText: 'Descrição', border: InputBorder.none),
                     maxLines: null,
-                    validator: (desc){
-                      if(desc.length < 10)
-                        return 'Descrição muito curta';
+                    validator: (desc) {
+                      if (desc.length < 10) return 'Descrição muito curta';
                       return null;
                     },
                   ),
                   SizesForm(product),
-                  RaisedButton(
-                    onPressed: () {
-                      if (formKey.currentState.validate()) {
-                        print('válido');
-                      }
-                    },
-                    child: const Text(('Salvar')),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    height: 44,
+                    child: RaisedButton(
+                      onPressed: () {
+                        if (formKey.currentState.validate()) {
+                          print('válido');
+                        }
+                      },
+                      textColor: Colors.white,
+                      color: primaryColor,
+                      disabledColor: primaryColor.withAlpha(100),
+                      child: const Text('Salvar',
+                      style: TextStyle(fontSize: 20),),
+                    ),
                   )
                 ],
               ),

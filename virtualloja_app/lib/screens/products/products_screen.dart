@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:virtualloja_app/commom/custom_drawe/custom_drawer.dart';
 import 'package:virtualloja_app/models/product_manager.dart';
+import 'package:virtualloja_app/models/user_manager.dart';
 import 'package:virtualloja_app/screens/products/components/product_list_tile.dart';
 
 import 'components/search_dialog.dart';
@@ -62,6 +63,18 @@ class ProductsScreen extends StatelessWidget {
                   productManager.search = '';
                 },
               );
+            }
+          }),
+          Consumer<UserManager>(builder: (_, userManager, __) {
+            if (userManager.adminEnabled) {
+              return IconButton(
+                icon: Icon(Icons.add),
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/edit_product');
+                },
+              );
+            } else {
+              return Container();
             }
           })
         ],

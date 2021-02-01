@@ -13,18 +13,14 @@ class ImagesForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return FormField<List<dynamic>>(
-      initialValue: List.from(product.images),
-      validator: (images){
-        if(images.isEmpty)
-          return 'Insira ao memos uma imagem';
+      initialValue: (product.images),
+      validator: (images) {
+        if (images.isEmpty) return 'Insira ao memos uma imagem';
         return null;
       },
       builder: (state) {
-        void onImageSelected(File file){
+        void onImageSelected(File file) {
           state.value.add(file);
           state.didChange(state.value);
           Navigator.of(context).pop();
@@ -40,7 +36,10 @@ class ImagesForm extends StatelessWidget {
                     fit: StackFit.expand,
                     children: [
                       if (image is String)
-                        Image.network(image, fit: BoxFit.cover,)
+                        Image.network(
+                          image,
+                          fit: BoxFit.cover,
+                        )
                       else
                         Image.file(image as File, fit: BoxFit.cover),
                       Align(
@@ -62,48 +61,38 @@ class ImagesForm extends StatelessWidget {
                       color: Colors.grey[100],
                       child: IconButton(
                           icon: Icon(Icons.add_a_photo),
-                          color: Theme
-                              .of(context)
-                              .primaryColor,
+                          color: Theme.of(context).primaryColor,
                           iconSize: 50,
                           onPressed: () {
                             if (Platform.isAndroid)
                               showModalBottomSheet(
                                   context: context,
                                   builder: (_) => ImageSourceSheet(
-                                    onImageSelected: onImageSelected ,
-                                  )
-
-                              );
+                                        onImageSelected: onImageSelected,
+                                      ));
                             else
                               showCupertinoModalPopup(
                                   context: context,
                                   builder: (_) => ImageSourceSheet(
-                                    onImageSelected: onImageSelected,
-                                  )
-                              );
-                          }
-
-                      ),
+                                        onImageSelected: onImageSelected,
+                                      ));
+                          }),
                     ),
                   ),
                 // dotSize: 4,
                 dotSpacing: 15,
                 dotBgColor: Colors.transparent,
-                dotColor: Theme
-                    .of(context)
-                    .primaryColor,
+                dotColor: Theme.of(context).primaryColor,
                 autoplay: false,
               ),
             ),
-            if(state.hasError)
+            if (state.hasError)
               Container(
-                margin: const EdgeInsets.only(top: 16, left:16 ),
+                margin: const EdgeInsets.only(top: 16, left: 16),
                 alignment: Alignment.centerLeft,
-                child: Text(state.errorText,
-                style: TextStyle(
-                  color: Colors.red
-                ),
+                child: Text(
+                  state.errorText,
+                  style: TextStyle(color: Colors.red),
                 ),
               )
           ],
